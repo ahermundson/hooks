@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can add a todo item - UseReducerTodoList 1`] = `
+<div>
+  <form
+    class="login-form"
+  >
+    <h1
+      style="text-align: center;"
+    >
+      Use Reducer
+    </h1>
+    <div
+      class="input-group"
+    >
+      <label
+        for="username-input"
+      >
+        Todo
+      </label>
+      <input
+        id="todo-input"
+        placeholder="Add Todo"
+        type="text"
+        value=""
+      />
+    </div>
+    <button>
+      Submit
+    </button>
+  </form>
+  <ul
+    data-testid="todo-list"
+  >
+    <li
+      data-testid="list-item"
+    >
+      todo
+    </li>
+  </ul>
+</div>
+`;

@@ -1,12 +1,15 @@
 import React from "react";
 import { render, fireEvent } from "react-testing-library";
-import UseStateTodoList from "../exercises/UseStateTodoList";
-// import UseStateTodoList from "../solutions/UseStateTodoList";
+// import UseStateTodoList from "../exercises/UseStateTodoList";
+import { TodoContextProvider } from "../exercises/Context";
+import UseStateTodoList from "../solutions/UseStateTodoList";
 
 test("Can add todo", () => {
   const fakeSubmit = jest.fn(() => {});
   const { container, getByPlaceholderText, getByText } = render(
-    <UseStateTodoList onSubmit={fakeSubmit} />
+    <TodoContextProvider>
+      <UseStateTodoList onSubmit={fakeSubmit} />
+    </TodoContextProvider>
   );
   const todoInput = getByPlaceholderText("Add Todo");
   const submitButton = getByText("Submit");

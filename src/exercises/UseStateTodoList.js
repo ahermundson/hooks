@@ -2,6 +2,7 @@ import React from "react";
 import uuid from "uuid";
 import TodoListForm from "../exercises/UseStateTodoList/TodoListForm";
 import TodoListItem from "../exercises/UseStateTodoList/TodoListItem";
+import { TodoContextConsumer } from "./Context";
 
 // TODO: Change from class to Functional Component
 class UseStateTodoList extends React.Component {
@@ -26,23 +27,38 @@ class UseStateTodoList extends React.Component {
     });
   };
 
+  clearInput = () => {
+    this.setState({
+      todoInputValue: ""
+    });
+  };
+
   // Udpate JSX to use methods created from useSTate hooks
   render() {
-    const { todoInputValue, todos } = this.state;
+    const { todoInputValue } = this.state;
 
     return (
       <React.Fragment>
-        <TodoListForm
-          todoInputValue={todoInputValue}
-          handleSubmit={this.onSubmit}
-          handleTodoInputChange={this.handleTodoInputChange}
-          header="Use State"
-        />
-        <ul data-testid="todo-list">
-          {todos.map(({ todo, id }) => (
-            <TodoListItem key={id} todo={todo} />
-          ))}
-        </ul>
+        <TodoContextConsumer>
+          {({ todos, addTodo }) => (
+            <React.Fragment>
+              <TodoListForm
+                todoInputValue={todoInputValue}
+                handleSubmit={() => {
+                  addTodo({ todo: todoInputValue, id: uuid() });
+                  this.clearInput();
+                }}
+                handleTodoInputChange={this.handleTodoInputChange}
+                header="Use State"
+              />
+              <ul data-testid="todo-list">
+                {todos.map(({ todo, id }) => (
+                  <TodoListItem key={id} todo={todo} />
+                ))}
+              </ul>
+            </React.Fragment>
+          )}
+        </TodoContextConsumer>
       </React.Fragment>
     );
   }

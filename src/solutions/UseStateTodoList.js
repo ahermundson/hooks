@@ -2,11 +2,12 @@ import React from "react";
 import uuid from "uuid";
 import TodoListForm from "../exercises/UseStateTodoList/TodoListForm";
 import TodoListItem from "../exercises/UseStateTodoList/TodoListItem";
-
+import { TodoContext } from "../exercises/Context";
 // TODO: Change from class to Functional Component
 const UseStateTodoList = () => {
   const [todoInputValue, updateTodoInputValue] = React.useState("");
-  const [todos, updateTodos] = React.useState([]);
+
+  const { todos, addTodo } = React.useContext(TodoContext);
 
   // Create UseState hooks for username and password
   function handleTodoInputChange(e) {
@@ -14,7 +15,7 @@ const UseStateTodoList = () => {
   }
 
   function onSubmit() {
-    updateTodos([...todos, { todo: todoInputValue, id: uuid() }]);
+    addTodo({ todo: todoInputValue, id: uuid() });
     updateTodoInputValue("");
   }
 
